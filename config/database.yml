@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 15
+  username: rna_as_api
+  password: password
+
+development:
+  <<: *default
+  database: rna_as_api_development
+
+test:
+  <<: *default
+  database: rna_as_api_test
+
+production:
+  <<: *default
+  database: rna_as_api_production
