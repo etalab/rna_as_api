@@ -1,4 +1,4 @@
-class UnzipFile < SireneAsAPIInteractor
+class UnzipFile < RnaAsAPIInteractor
   around do |interactor|
     interactor.call
 

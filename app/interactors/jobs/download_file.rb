@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class DownloadFile < SireneAsAPIInteractor
+class DownloadFile < RnaAsAPIInteractor
   around do |interactor|
     stdout_info_log "Attempting to download #{filename}"
 
@@ -18,7 +18,9 @@ class DownloadFile < SireneAsAPIInteractor
   end
 
   def call
-    download = open(context.link)
+    uri = URI(context.link)
+    binding.pry
+    download = open(uri)
     IO.copy_stream(download, context.filepath)
   end
 
