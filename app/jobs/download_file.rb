@@ -2,10 +2,10 @@ require 'open-uri'
 
 class DownloadFile < RnaAsAPIInteractor
   around do |interactor|
-    stdout_info_log "Attempting to download #{filename}"
+    stdout_info_log "Attempting to download #{context.current_import}"
 
+    filename = link_to_import['name']
     context.filepath = "./tmp/files/#{filename}"
-    context.filename = filename
 
     if File.exist?(context.filepath)
       stdout_warn_log "#{filename} already exists ! Skipping download"
@@ -13,20 +13,17 @@ class DownloadFile < RnaAsAPIInteractor
       interactor.call
       stdout_success_log "Downloaded #{filename} successfuly"
     end
-
-    puts
   end
 
   def call
-    uri = URI(context.link)
-    binding.pry
-    download = open(uri)
+    # Security risk : replace value
+    download = open(link_to_import['link'])
     IO.copy_stream(download, context.filepath)
   end
 
   private
 
-  def filename
-    URI(context.link).path.split('/').last
+  def link_to_import
+    context.current_import == 'waldec' ? context.link_waldec : context.link_import
   end
 end
