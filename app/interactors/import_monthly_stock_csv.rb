@@ -39,9 +39,9 @@ class ImportMonthlyStockCsv < RnaAsAPIInteractor
 
   def csv_options
     {
-      chunk_size: 10_000,
+      chunk_size: 2_000,
       col_sep: ';',
-      # row_sep: "\r\n",
+      row_sep: :auto,
       convert_values_to_numeric: false,
       key_mapping: {},
       file_encoding: 'ASCII-8BIT'

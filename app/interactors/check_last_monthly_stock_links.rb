@@ -19,7 +19,7 @@ class CheckLastMonthlyStockLinks < RnaAsAPIInteractor
   private
 
   def import_file_waldec_if_needed
-    if context.link_waldec['apply']
+    if context.link_waldec['apply'] == true
       stdout_success_log('New waldec file will be imported')
       context.current_import = 'waldec'
     else
@@ -65,13 +65,17 @@ class CheckLastMonthlyStockLinks < RnaAsAPIInteractor
     path_to_save_file = SaveLastMonthlyStockNames.new.path_import
     return Date.new unless File.exist?(path_to_save_file)
 
-    ## TODO not finished here !!!
-    File.read(SaveLastMonthlyStockNames.new.path_import)
+    file_content = File.read(SaveLastMonthlyStockNames.new.path_import)
+    date = file_content.match('\d{8}').to_s
+    Date.parse(date)
   end
 
   def saved_last_waldec_date
     path_to_save_file = SaveLastMonthlyStockNames.new.path_waldec
     return Date.new unless File.exist?(path_to_save_file)
-    File.read(SaveLastMonthlyStockNames.new.path_waldec)
+
+    file_content = File.read(SaveLastMonthlyStockNames.new.path_waldec)
+    date = file_content.match('\d{8}').to_s
+    Date.parse(date)
   end
 end

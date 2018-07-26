@@ -3,7 +3,7 @@ class InsertAssociationRowsJob < AssociationRowJobs
 
   def initialize(lines, current_import)
     @lines = lines
-    @current_class = current_import
+    @current_import = current_import
   end
 
   def perform

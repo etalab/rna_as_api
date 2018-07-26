@@ -8,6 +8,8 @@ class SaveLastMonthlyStockNames < RnaAsAPIInteractor
 
     File.open(path_waldec, 'w+') { |f| f << context.link_waldec['name'] } if context.current_import == 'waldec'
     File.open(path_import, 'w+') { |f| f << context.link_import['name'] } if context.current_import == 'import'
+
+    stdout_success_log 'Import done !'
   end
 
   def link_folder

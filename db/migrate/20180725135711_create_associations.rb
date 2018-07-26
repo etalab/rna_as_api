@@ -15,9 +15,12 @@ class CreateAssociations < ActiveRecord::Migration[5.2]
       t.string :groupement
       t.string :titre
       t.string :titre_court
-      t.string :objet
+      t.text :objet
       t.string :objet_social1
       t.string :objet_social2
+      t.string :l1_adresse_import
+      t.string :l2_adresse_import
+      t.string :l3_adresse_import
       t.string :adresse_siege
       t.string :adresse_numero_voie
       t.string :adresse_repetition
