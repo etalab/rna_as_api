@@ -1,7 +1,7 @@
 require 'date'
 
 # Check if our stock links are legit and should be applied
-class CheckLastMonthlyStockLinks < RnaAsAPIInteractor
+class StartImportIfNeeded < RnaAsAPIInteractor
   around do |interactor|
     stdout_info_log 'Checking which monthly stock to apply...'
 
@@ -22,6 +22,7 @@ class CheckLastMonthlyStockLinks < RnaAsAPIInteractor
     if context.link_waldec['apply'] == true
       stdout_success_log('New waldec file will be imported')
       context.current_import = 'waldec'
+      RefillOneDatabase.call(context)
     else
       stdout_success_log('Waldec up-to-date, no import needed.')
     end
@@ -31,6 +32,7 @@ class CheckLastMonthlyStockLinks < RnaAsAPIInteractor
     if context.link_import['apply'] == true
       stdout_success_log('New import file will be imported')
       context.current_import = 'import'
+      RefillOneDatabase.call(context)
     else
       stdout_success_log('Import up-to-date, no import needed')
     end

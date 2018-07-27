@@ -14,3 +14,5 @@ class AssociationRowJobs < RnaAsAPIInteractor
     associations
   end
 end
+
+#         line.encode!(Encoding::ISO_8859_1, Encoding::ISO_8859_1, invalid: :replace, undef: :replace, universal_newline: true)

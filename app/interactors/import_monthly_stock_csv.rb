@@ -1,19 +1,14 @@
 class ImportMonthlyStockCsv < RnaAsAPIInteractor
   around do |interactor|
-    context.csv_filename = context.unzipped_files.first
     stdout_info_log "Starting csv import of #{context.csv_filename}"
 
     compute_row_number
 
     stdout_info_log 'Importing rows...'
 
-    # quietly do
-    #   stdout_association_count_change do
-        # stdout_benchmark_stats do
-          interactor.call
-        # end
-      # end
-    # end
+    quietly do
+      interactor.call
+    end
   end
 
   def call
@@ -39,12 +34,12 @@ class ImportMonthlyStockCsv < RnaAsAPIInteractor
 
   def csv_options
     {
-      chunk_size: 2_000,
+      chunk_size: 1000,
       col_sep: ';',
       row_sep: :auto,
       convert_values_to_numeric: false,
       key_mapping: {},
-      file_encoding: 'ASCII-8BIT'
+      file_encoding: 'UTF-8'
     }
   end
 
@@ -64,24 +59,6 @@ class ImportMonthlyStockCsv < RnaAsAPIInteractor
     Rails.logger.level = log_level_before_block_execution
     ActiveRecord::Base.logger.level = ar_log_level_before_block_execution
   end
-
-  def stdout_association_count_change
-    etablissement_count_before = current_imported_class.count
-    yield
-    etablissement_count_after = current_imported_class.count
-
-    entries_added = etablissement_count_after - etablissement_count_before
-
-    puts "#{entries_added} etablissements added"
-  end
-
-  # def stdout_benchmark_stats
-  #   Benchmark.bm(7) do |x|
-  #     x.report(:csv_pro) do
-  #       yield
-  #     end
-  #   end
-  # end
 
   def current_imported_class
     context.current_import == 'waldec' ? Association.only_waldec : Association.only_import

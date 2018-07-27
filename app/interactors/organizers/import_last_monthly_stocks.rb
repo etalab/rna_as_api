@@ -1,6 +1,5 @@
 class ImportLastMonthlyStocks
   include Interactor::Organizer
 
-  organize GetLastMonthlyStockLinks, ParseLastMonthlyStockLinks, CheckLastMonthlyStockLinks,
-           DeleteDatabase, ImportMonthlyStock
+  organize GetLastMonthlyStockLinks, ParseLastMonthlyStockLinks, StartImportIfNeeded
 end
