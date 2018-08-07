@@ -27,6 +27,7 @@ if ARGV.grep(/spec\.rb/).empty?
     add_filter '/app/jobs/association_import_attrs_from_line.rb'
     add_filter '/app/jobs/association_waldec_attrs_from_line.rb'
     add_filter '/app/jobs/application_job.rb'
+    add_filter '/app/jobs/delete_database.rb'
     add_filter '/app/mailers/'
     add_filter '/lib/string.rb'
     add_filter '/app/interactors/organizers/'
