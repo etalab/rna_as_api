@@ -13,7 +13,53 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+ENV['RAILS_ENV'] ||= 'test'
+
+require 'vcr'
+
+# Test coverage options (activated only if rspec is run without arguments)
+if ARGV.grep(/spec\.rb/).empty?
+  require 'simplecov'
+  require 'simplecov-console'
+  SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
+  SimpleCov.start 'rails' do
+    add_filter '/app/channels/'
+    add_filter '/app/jobs/association_import_attrs_from_line.rb'
+    add_filter '/app/jobs/association_waldec_attrs_from_line.rb'
+    add_filter '/app/jobs/application_job.rb'
+    add_filter '/app/mailers/'
+    add_filter '/lib/string.rb'
+    add_filter '/app/interactors/organizers/'
+  end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+  # Condig allow http connections without cassettes for requests on Solr server
+  config.allow_http_connections_when_no_cassette = true
+  # Config ignore_request to stop VCR from managing Solr server requests
+  config.ignore_request do |request|
+    URI(request.uri).port == 8981
+  end
+end
+
 RSpec.configure do |config|
+  # Silence output during tests
+
+  # original_stderr = $stderr
+  # original_stdout = $stdout
+  # config.before(:all) do
+  #   # Redirect stderr and stdout
+  #   $stderr = File.open(File::NULL, 'w')
+  #   $stdout = File.open(File::NULL, 'w')
+  # end
+  # config.after(:all) do
+  #   $stderr = original_stderr
+  #   $stdout = original_stdout
+  # end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

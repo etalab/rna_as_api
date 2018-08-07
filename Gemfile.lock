@@ -42,24 +42,36 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    ansi (1.5.0)
     arel (9.0.0)
     builder (3.2.3)
     byebug (10.0.2)
     coderay (1.1.2)
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.4)
     diff-lcs (1.3)
+    docile (1.3.1)
     erubi (1.7.1)
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
+    fuubar (2.3.2)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hashdiff (0.3.7)
     highline (1.7.10)
+    hirb (0.7.3)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     interactor (3.1.0)
+    json (2.1.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -97,6 +109,7 @@ GEM
     pry-byebug (3.6.0)
       byebug (~> 10.0)
       pry (~> 0.10)
+    public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
     rack-test (1.0.0)
@@ -154,6 +167,16 @@ GEM
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
+    safe_yaml (1.0.4)
+    simplecov (0.16.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-console (0.4.2)
+      ansi
+      hirb
+      simplecov
+    simplecov-html (0.10.2)
     smarter_csv (1.2.3)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -178,6 +201,11 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    vcr (4.0.0)
+    webmock (3.4.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -187,6 +215,7 @@ PLATFORMS
 
 DEPENDENCIES
   colorize
+  fuubar
   interactor (~> 3.1.0)
   listen (>= 3.0.5, < 3.2)
   logstasher
@@ -199,11 +228,15 @@ DEPENDENCIES
   rspec-rails (~> 3.7.2)
   ruby-progressbar
   rubyzip
+  simplecov
+  simplecov-console
   smarter_csv
   spring
   spring-watcher-listen (~> 2.0.1)
   sunspot_rails
   sunspot_solr
+  vcr
+  webmock
 
 BUNDLED WITH
    1.16.3

@@ -39,3 +39,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.1'
 end
 
+group :test do
+  gem 'fuubar'
+  gem 'simplecov'
+  gem 'simplecov-console'
+  gem 'vcr'
+  gem 'webmock'
+end
