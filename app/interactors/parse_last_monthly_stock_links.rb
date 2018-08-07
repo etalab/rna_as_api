@@ -22,6 +22,8 @@ class ParseLastMonthlyStockLinks < RnaAsAPIInteractor
         context.fail!
       end
     end
+
+    check_if_one_waldec_and_one_import
   end
 
   private
@@ -34,16 +36,16 @@ class ParseLastMonthlyStockLinks < RnaAsAPIInteractor
 
   def fill_information_link_waldec(link)
     context.link_waldec = {}
-    context.link_waldec['link'] = link.to_s
-    context.link_waldec['name'] = link.split('/').last
-    context.link_waldec['date'] = get_date(link)
+    context.link_waldec[:link] = link.to_s
+    context.link_waldec[:name] = link.split('/').last
+    context.link_waldec[:date] = get_date(link)
   end
 
   def fill_information_link_import(link)
     context.link_import = {}
-    context.link_import['link'] = link.to_s
-    context.link_import['name'] = link.split('/').last
-    context.link_import['date'] = get_date(link)
+    context.link_import[:link] = link.to_s
+    context.link_import[:name] = link.split('/').last
+    context.link_import[:date] = get_date(link)
   end
 
   def check_if_one_waldec_and_one_import

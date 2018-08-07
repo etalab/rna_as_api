@@ -4,7 +4,7 @@ class DownloadFile < RnaAsAPIInteractor
   around do |interactor|
     stdout_info_log "Attempting to download #{context.current_import}"
 
-    filename = link_to_import['name']
+    filename = link_to_import[:name]
     context.filepath = "./tmp/files/#{filename}"
 
     if File.exist?(context.filepath)
@@ -17,7 +17,7 @@ class DownloadFile < RnaAsAPIInteractor
 
   def call
     # Security risk : replace value
-    download = open(link_to_import['link'])
+    download = open(link_to_import[:link])
     IO.copy_stream(download, context.filepath)
   end
 

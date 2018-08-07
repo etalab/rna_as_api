@@ -46,6 +46,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (9.0.0)
+    ast (2.4.0)
     builder (3.2.3)
     byebug (10.0.2)
     coderay (1.1.2)
@@ -71,6 +72,7 @@ GEM
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     interactor (3.1.0)
+    jaro_winkler (1.5.1)
     json (2.1.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -98,7 +100,11 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     options (2.3.2)
+    parallel (1.12.1)
+    parser (2.5.1.2)
+      ast (~> 2.4.0)
     pg (0.21.0)
+    powerpack (0.1.2)
     pr_geohash (1.0.0)
     progress_bar (1.2.0)
       highline (~> 1.6)
@@ -138,6 +144,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (3.0.0)
     rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
@@ -164,6 +171,18 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    rubocop (0.58.2)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-checkstyle_formatter (0.4.0)
+      rubocop (>= 0.35.1)
+    rubocop-rspec (1.27.0)
+      rubocop (>= 0.56.0)
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
@@ -180,6 +199,8 @@ GEM
     smarter_csv (1.2.3)
     spring (2.0.2)
       activesupport (>= 4.2)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -201,6 +222,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    unicode-display_width (1.4.0)
     vcr (4.0.0)
     webmock (3.4.2)
       addressable (>= 2.3.6)
@@ -226,12 +248,15 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.2.0)
   rspec-rails (~> 3.7.2)
+  rubocop-checkstyle_formatter
+  rubocop-rspec
   ruby-progressbar
   rubyzip
   simplecov
   simplecov-console
   smarter_csv
   spring
+  spring-commands-rspec
   spring-watcher-listen (~> 2.0.1)
   sunspot_rails
   sunspot_solr

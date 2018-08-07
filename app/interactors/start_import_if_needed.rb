@@ -56,11 +56,11 @@ class StartImportIfNeeded < RnaAsAPIInteractor
   end
 
   def should_apply_waldec?
-    saved_last_waldec_date.nil? || saved_last_waldec_date < context.link_waldec['date']
+    saved_last_waldec_date.nil? || saved_last_waldec_date < context.link_waldec[:date]
   end
 
   def should_apply_import?
-    saved_last_import_date.nil? || saved_last_import_date < context.link_import['date']
+    saved_last_import_date.nil? || saved_last_import_date < context.link_import[:date]
   end
 
   def saved_last_import_date
