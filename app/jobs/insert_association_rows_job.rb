@@ -15,9 +15,9 @@ class InsertAssociationRowsJob < AssociationRowJobs
 
     ar_values_string = associations.map { |h| value_string_from_association_hash(h) }.join(', ')
 
-    ar_query_string = " INSERT INTO associations (#{ar_keys.join(',')})
-                        VALUES
-                        #{ar_values_string}; "
+    ar_query_string = "INSERT INTO associations (#{ar_keys.join(',')})
+                       VALUES
+                       #{ar_values_string};"
 
     insert_into_database(ar_query_string)
     true

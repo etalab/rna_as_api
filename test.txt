@@ -1,0 +1,17 @@
+
+Progress: |------>  Starting csv import of spec/fixtures/sample_files/rna_sample_waldec.csv
+------>  Computing number of rows...
+       [0;32;49m✓  Found 3 rows to import[0m
+------>  Importing rows...
+
+Progress: |====================================================================================================================================================================================|
+==========================================================================================------>  Starting csv import of spec/fixtures/sample_files/rna_sample_import.csv
+------>  Computing number of rows...
+       [0;32;49m✓  Found 3 rows to import[0m
+------>  Importing rows...
+
+Progress: |====================================================================================================================================================================================|
+==========================================================================================|
+
+Finished in 0.024 seconds (files took 0.29715 seconds to load)
+2 examples, 0 failures

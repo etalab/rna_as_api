@@ -11,8 +11,10 @@ class StartImportIfNeeded < RnaAsAPIInteractor
   def call
     check_if_one_waldec_and_one_import
     check_date_links
+
     import_file_waldec_if_needed
     import_file_import_if_needed
+
     nothing_to_import if context.current_import.nil?
   end
 
@@ -51,25 +53,8 @@ class StartImportIfNeeded < RnaAsAPIInteractor
   end
 
   def check_date_links
-    context.link_waldec['apply'] = true if should_apply_waldec?
-    context.link_import['apply'] = true if should_apply_import?
-  end
-
-  def should_apply_waldec?
-    saved_last_waldec_date.nil? || saved_last_waldec_date < context.link_waldec[:date]
-  end
-
-  def should_apply_import?
-    saved_last_import_date.nil? || saved_last_import_date < context.link_import[:date]
-  end
-
-  def saved_last_import_date
-    path_to_save_file = SaveLastMonthlyStockNames.new.path_import
-    return Date.new unless File.exist?(path_to_save_file)
-
-    file_content = File.read(SaveLastMonthlyStockNames.new.path_import)
-    date = file_content.match('\d{8}').to_s
-    Date.parse(date)
+    context.link_waldec['apply'] = true if saved_last_waldec_date < context.link_waldec[:date]
+    context.link_import['apply'] = true if saved_last_import_date < context.link_import[:date]
   end
 
   def saved_last_waldec_date
@@ -77,6 +62,15 @@ class StartImportIfNeeded < RnaAsAPIInteractor
     return Date.new unless File.exist?(path_to_save_file)
 
     file_content = File.read(SaveLastMonthlyStockNames.new.path_waldec)
+    date = file_content.match('\d{8}').to_s
+    Date.parse(date)
+  end
+
+  def saved_last_import_date
+    path_to_save_file = SaveLastMonthlyStockNames.new.path_import
+    return Date.new unless File.exist?(path_to_save_file)
+
+    file_content = File.read(SaveLastMonthlyStockNames.new.path_import)
     date = file_content.match('\d{8}').to_s
     Date.parse(date)
   end
