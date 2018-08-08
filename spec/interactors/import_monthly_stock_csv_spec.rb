@@ -3,7 +3,7 @@ require 'timecop'
 
 describe ImportMonthlyStockCsv do
   before(:all) do
-    Timecop.freeze(Time.local(2018, 9, 1, 10, 5, 0))
+    Timecop.freeze(Time.utc(2018, 9, 1, 10, 5, 0))
   end
 
   after(:all) do
