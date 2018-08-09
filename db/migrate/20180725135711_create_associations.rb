@@ -3,8 +3,8 @@ class CreateAssociations < ActiveRecord::Migration[5.2]
     create_table :associations do |t|
       t.string :is_waldec
       t.string :id_association, index: true
-      t.string :id_ex_association
-      t.string :siret
+      t.string :id_ex_association, index: true
+      t.string :siret, index: true
       t.string :numero_reconnaissance_utilite_publique
       t.string :code_gestion
       t.string :date_creation
@@ -50,5 +50,7 @@ class CreateAssociations < ActiveRecord::Migration[5.2]
     end
 
     execute 'create index on associations (id_association);'
+    execute 'create index on associations (id_ex_association);'
+    execute 'create index on associations (siret);'
   end
 end

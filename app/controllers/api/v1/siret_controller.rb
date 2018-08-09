@@ -1,6 +1,6 @@
-class API::V1::IdAssociationController < ApplicationController
+class API::V1::SiretController < ApplicationController
   def show
-    result = Association.find_by(id_association: id_params[:id])
+    result = Association.find_by(siret: siret_params[:siret])
 
     if result.nil?
       render json: { message: 'no results found' }, status: 404
@@ -11,7 +11,7 @@ class API::V1::IdAssociationController < ApplicationController
 
   private
 
-  def id_params
-    params.permit(:id)
+  def siret_params
+    params.permit(:siret)
   end
 end

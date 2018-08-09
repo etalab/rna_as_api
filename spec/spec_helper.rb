@@ -21,6 +21,7 @@ require 'vcr'
 if ARGV.grep(/spec\.rb/).empty?
   require 'simplecov'
   require 'simplecov-console'
+  require 'factory_bot'
   SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
   SimpleCov.start 'rails' do
     add_filter '/app/channels/'

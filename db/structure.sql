@@ -21,6 +21,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -162,10 +176,38 @@ CREATE INDEX associations_id_association_idx ON associations USING btree (id_ass
 
 
 --
+-- Name: associations_id_ex_association_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX associations_id_ex_association_idx ON associations USING btree (id_ex_association);
+
+
+--
+-- Name: associations_siret_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX associations_siret_idx ON associations USING btree (siret);
+
+
+--
 -- Name: index_associations_on_id_association; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_associations_on_id_association ON associations USING btree (id_association);
+
+
+--
+-- Name: index_associations_on_id_ex_association; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_associations_on_id_ex_association ON associations USING btree (id_ex_association);
+
+
+--
+-- Name: index_associations_on_siret; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_associations_on_siret ON associations USING btree (siret);
 
 
 --
