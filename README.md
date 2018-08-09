@@ -112,6 +112,11 @@ L'API renvoie les réponses au format JSON avec les attributs suivant :
 | page          | Page actuelle                |
 | associations  | Résultats                    |
 
+## Recherche par ID d'association
+
+    curl 'localhost:3000/v1/id/ID_ASSOCIATION'
+
+Cette requête renvoie uniquement la fiche association correspondant à l'ID.
 
 # Problèmes fréquents
 

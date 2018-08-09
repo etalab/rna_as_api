@@ -2,12 +2,13 @@ require 'rails_helper'
 
 describe API::V1::FullTextController do
   context 'when doing unsuccessful search', type: :request do
-    it 'returns nothing' do
-      get '/v1/full_text/ghost_association_5678754579828655384'
+    before { create(:association, titre: 'foobar', id: 1) }
+    before { Association.reindex }
 
-      expect(response.body).to look_like_json
-      expect(body_as_json).to match(message: 'no results found')
-      expect(response).to have_http_status(404)
+    it 'returns nothing' do
+      get '/v1/full_text/notfound'
+
+      expect(response).to be_not_found_payload
     end
   end
 
@@ -19,14 +20,7 @@ describe API::V1::FullTextController do
     it 'works' do
       get '/v1/full_text/foobar'
 
-      expect(results_no_associations).to match(
-        total_results: 1,
-        total_pages: 1,
-        per_page: 10,
-        page: 1
-      )
-      expect(results_only_associations.first[:id]).to eq(1)
-      expect(response).to have_http_status(200)
+      expect(response).to find_one_association_with_id_1
     end
   end
 
