@@ -24,3 +24,12 @@ end
 def json_str_to_hash(str)
   JSON.parse(str).with_indifferent_access
 end
+
+def results_only_associations
+  associations = body_as_json.slice(:associations)
+  associations[:associations]
+end
+
+def results_no_associations
+  body_as_json.slice!(:associations)
+end

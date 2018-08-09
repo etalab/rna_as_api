@@ -61,6 +61,9 @@ RSpec.configure do |config|
     $stdout = original_stdout
   end
 
+  # FactoryBot methods
+  config.include FactoryBot::Syntax::Methods
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

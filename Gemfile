@@ -27,6 +27,7 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.7.2'
