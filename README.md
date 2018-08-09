@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/maintainability)](https://codeclimate.com/github/betagouv/rna_as_api/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/test_coverage)](https://codeclimate.com/github/betagouv/rna_as_api/test_coverage)
+[![Build Status](https://travis-ci.org/betagouv/rna_as_api.svg?branch=master)](https://travis-ci.org/betagouv/rna_as_api)[![Maintainability](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/maintainability)](https://codeclimate.com/github/betagouv/rna_as_api/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/test_coverage)](https://codeclimate.com/github/betagouv/rna_as_api/test_coverage)
 
 # RNA as API
 
