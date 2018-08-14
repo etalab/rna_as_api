@@ -118,6 +118,12 @@ L'API renvoie les réponses au format JSON avec les attributs suivant :
 
 Cette requête renvoie uniquement la fiche association correspondant à l'ID.
 
+## Recherche par Siret
+
+    curl 'localhost:3000/v1/siret/SIRET'
+
+Cette requête renvoie uniquement la fiche association correspondant au Siret. Attention, toutes les associations ne possèdent pas forcément un Siret.
+
 # Problèmes fréquents
 
 Si l'API ne renvoie aucun résultat sur la recherche `fulltext` mais que la recherche `siret` fonctionne, vous avez sans doute besoin de réindexer. Tentez `RAILS_ENV=MonEnvironnement bundle exec rake sunspot:solr:reindex` (le server solr doit être actif).
