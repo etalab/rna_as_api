@@ -15,10 +15,10 @@ gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.2.0'
 
+gem 'rack-cors'
+gem 'ruby-progressbar'
 gem 'rubyzip'
 gem 'smarter_csv'
-
-gem 'ruby-progressbar'
 # Gem progress_bar required for displaying progress in rake sunspot:reindex
 gem 'progress_bar'
 
