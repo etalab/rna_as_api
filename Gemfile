@@ -35,6 +35,7 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'mina'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rubocop-checkstyle_formatter', require: false
   gem 'rubocop-rspec', require: false
