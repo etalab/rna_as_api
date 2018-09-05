@@ -15,10 +15,10 @@ print "Deploy to #{ENV['to']} environment\n".green
 
 set :commit, ENV['commit']
 set :user, 'deploy'
-set :application_name, 'rna'
+set :application_name, 'rna_api'
 set :domain, ENV['domain']
 
-set :deploy_to, "/var/www/rna_#{ENV['to']}"
+set :deploy_to, "/var/www/rna_api_#{ENV['to']}"
 set :rails_env, ENV['to']
 
 set :forward_agent, true
