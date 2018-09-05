@@ -5,8 +5,8 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-production1 = 'http://production1.entreprise.data.gouv.fr'
-production2 = 'http://production2.entreprise.data.gouv.fr'
+production1 = 'production1.entreprise.data.gouv.fr'
+production2 = 'production2.entreprise.data.gouv.fr'
 
 domains = [production1, production2]
 

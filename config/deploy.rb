@@ -74,7 +74,6 @@ task :deploy do
     set :bundle_options, fetch(:bundle_options) + ' --clean'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
