@@ -43,7 +43,8 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   'config/environments',
   'log',
   'tmp/pids',
-  'tmp/cache'
+  'tmp/cache',
+  'solr'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
@@ -77,16 +78,41 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :passenger
       in_path(fetch(:current_path)) do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
+
+        invoke :solr
       end
+
+      invoke :passenger
+      invoke :warning_info
     end
   end
 end
 
-task :passenger do
+task warning_info: :local_environment do
+  warning_sign = '\xE2\x9A\xA0'
+  comment %{#{warning_sign} #{warning_sign} #{warning_sign}}.yellow
+  comment %{#{warning_sign} We assume the first import was done. If not run :}.yellow
+  comment %{RAILS_ENV=#{ENV['to']} bundle exec rake rna_as_api:import_last_monthly_stocks}.yellow
+  comment %{#{warning_sign} #{warning_sign} #{warning_sign}}.yellow
+end
+
+task solr: :remote_environment do
+  pid_file = "/var/www/rna_api_#{ENV['to']}/shared/solr/pids/#{ENV['to']}/sunspot-solr-#{ENV['to']}.pid"
+  comment %{Start Solr if not already started}.green
+  command %{
+    if ([ -e #{pid_file} ] && ps -p $(cat #{pid_file})) > /dev/null
+    then
+      echo 'Skipping: Solr already started'
+    else
+      bundle exec rake sunspot:solr:start RAILS_ENV=#{ENV['to']}
+    fi
+  }
+end
+
+task passenger: :remote_environment do
   comment %{Attempting to start Passenger app}.green
   command %{
   if (sudo passenger-status | grep siade_#{ENV['to']}) >/dev/null
