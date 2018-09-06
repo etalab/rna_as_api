@@ -29,8 +29,7 @@ set :repository, 'git@github.com:etalab/rna_as_api.git'
 branch = begin
            case ENV['to']
            when 'production'
-             'develop'
-             #'master'
+             'master'
            when 'sandbox'
              'develop'
            end
