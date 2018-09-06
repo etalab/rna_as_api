@@ -2,6 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
+require 'mina/whenever'
 require 'colorize'
 
 ENV['domain'] || raise('no domain provided'.red)
@@ -82,6 +83,9 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
 
+        comment 'Updating cronotab'.green
+        invoke :'whenever:update'
+
         invoke :solr
       end
 
@@ -100,16 +104,17 @@ task warning_info: :local_environment do
 end
 
 task solr: :remote_environment do
-  pid_file = "/var/www/rna_api_#{ENV['to']}/shared/solr/pids/#{ENV['to']}/sunspot-solr-#{ENV['to']}.pid"
-  comment %{Start Solr if not already started}.green
-  command %{
-    if ([ -e #{pid_file} ] && ps -p $(cat #{pid_file})) > /dev/null
-    then
-      echo 'Skipping: Solr already started'
-    else
-      bundle exec rake sunspot:solr:start RAILS_ENV=#{ENV['to']}
-    fi
-  }
+  comment %{Restart Solr}.green
+  command %{bundle exec rake sunspot:solr:restart RAILS_ENV=#{ENV['to']}}
+#  pid_file = "/var/www/rna_api_#{ENV['to']}/shared/solr/pids/#{ENV['to']}/sunspot-solr-#{ENV['to']}.pid"
+#  command %{
+#    if ([ -e #{pid_file} ] && ps -p $(cat #{pid_file})) > /dev/null
+#    then
+#      echo 'Skipping: Solr already started'
+#    else
+#      bundle exec rake sunspot:solr:start RAILS_ENV=#{ENV['to']}
+#    fi
+#  }
 end
 
 task passenger: :remote_environment do
