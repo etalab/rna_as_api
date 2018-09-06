@@ -29,7 +29,8 @@ set :repository, 'git@github.com:etalab/rna_as_api.git'
 branch = begin
            case ENV['to']
            when 'production'
-             'master'
+             'develop'
+             #'master'
            when 'sandbox'
              'develop'
            end
@@ -45,7 +46,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   'log',
   'tmp/pids',
   'tmp/cache',
-  'solr'
+  'solr/pids'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
@@ -83,9 +84,7 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
 
-        comment 'Updating cronotab'.green
-        invoke :'whenever:update'
-
+        invoke :whenever_update
         invoke :solr
       end
 
@@ -95,30 +94,28 @@ task :deploy do
   end
 end
 
+task whenever_update: :remote_environment do
+  set :whenever_name, "rna_api_#{ENV['to']}" # default value is based on domain name, and it is used to match in crontab !
+  set :bundle_bin, '/usr/local/rbenv/shims/bundle' # with our rbenv config it cannot be found...
+
+  invoke :'whenever:update'
+end
+
 task warning_info: :local_environment do
   warning_sign = '\xE2\x9A\xA0'
-  comment %{#{warning_sign} #{warning_sign} #{warning_sign}}.yellow
-  comment %{#{warning_sign} We assume the first import was done. If not run :}.yellow
-  comment %{RAILS_ENV=#{ENV['to']} bundle exec rake rna_as_api:import_last_monthly_stocks}.yellow
-  comment %{#{warning_sign} #{warning_sign} #{warning_sign}}.yellow
+  comment "#{warning_sign} #{warning_sign} #{warning_sign}".yellow
+  comment "#{warning_sign} We assume the first import was done. If not run :".yellow
+  comment "RAILS_ENV=#{ENV['to']} bundle exec rake rna_as_api:import_last_monthly_stocks".yellow
+  comment "#{warning_sign} #{warning_sign} #{warning_sign}".yellow
 end
 
 task solr: :remote_environment do
-  comment %{Restart Solr}.green
-  command %{bundle exec rake sunspot:solr:restart RAILS_ENV=#{ENV['to']}}
-#  pid_file = "/var/www/rna_api_#{ENV['to']}/shared/solr/pids/#{ENV['to']}/sunspot-solr-#{ENV['to']}.pid"
-#  command %{
-#    if ([ -e #{pid_file} ] && ps -p $(cat #{pid_file})) > /dev/null
-#    then
-#      echo 'Skipping: Solr already started'
-#    else
-#      bundle exec rake sunspot:solr:start RAILS_ENV=#{ENV['to']}
-#    fi
-#  }
+  comment 'Restarting Solr service'.green
+  command "sudo systemctl restart solr_rna_api_#{ENV['to']}"
 end
 
 task passenger: :remote_environment do
-  comment %{Attempting to start Passenger app}.green
+  comment 'Attempting to start Passenger app'.green
   command %{
   if (sudo passenger-status | grep siade_#{ENV['to']}) >/dev/null
   then
