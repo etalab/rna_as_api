@@ -1,3 +1,10 @@
+sandbox:
+  solr:
+    hostname: localhost
+    port: 8994
+    log_level: OFF
+    path: /solr/sandbox
+    memory: 2G
 production:
   solr:
     hostname: localhost
