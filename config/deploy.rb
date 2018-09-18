@@ -45,7 +45,8 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   'log',
   'tmp/pids',
   'tmp/cache',
-  'solr/pids'
+  'solr/pids',
+  "solr/#{ENV['to']}"
 )
 
 set :shared_files, fetch(:shared_files, []).push(
