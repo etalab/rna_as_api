@@ -84,6 +84,12 @@ rake rna_as_api:delete_database:import           # Supprime les associations Imp
 rake rna_as_api:delete_database:waldec           # Supprime les associations Waldec
 ```
 
+Pour re-indexer Solr :
+
+```bash
+RAILS_ENV=MonEnvironnement bundle exec rake sunspot:reindex
+```
+
 # Utilisation de l'API
 
 ## Recherche FullText
