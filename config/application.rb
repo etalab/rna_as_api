@@ -19,6 +19,9 @@ module RnaAsApi
     config.load_defaults 5.1
     config.active_record.schema_format = :sql
 
+    # Custom config
+    config.switch_server = config_for(:switch_server)
+
     config.autoload_paths +=
       %W[ #{config.root}/lib/
           #{config.root}/app/interactors
