@@ -1,9 +1,17 @@
+sandbox:
+  solr:
+    hostname: localhost
+    port: 8994
+    log_level: WARNING
+    path: /solr/production
+
 production:
   solr:
     hostname: localhost
     port: 8993
     log_level: WARNING
     path: /solr/production
+    memory: 8G
 
 development:
   solr:

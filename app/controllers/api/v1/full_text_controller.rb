@@ -1,6 +1,7 @@
 require 'sunspot'
 
 class API::V1::FullTextController < ApplicationController
+  attr_accessor :page, :per_page
   def show
     @page = fulltext_params[:page] || 1
     @per_page = default_10_max_100(fulltext_params[:per_page])
@@ -26,7 +27,7 @@ class API::V1::FullTextController < ApplicationController
         fields(titre: 1.0)
       end
 
-      paginate page: @page, per_page: @per_page
+      paginate page: page, per_page: per_page
     end
     search
   end
@@ -43,8 +44,8 @@ class API::V1::FullTextController < ApplicationController
     {
       total_results: @search.total,
       total_pages: @results.total_pages,
-      per_page: @per_page,
-      page: @page,
+      per_page: per_page,
+      page: page,
       association: @results
     }
   end
