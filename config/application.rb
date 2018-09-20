@@ -13,7 +13,7 @@ require 'rails/test_unit/railtie'
 
 Bundler.require(*Rails.groups)
 
-module RnaAsApi
+module RNAAsAPI
   class Application < Rails::Application
     config.api_only = true
     config.load_defaults 5.1

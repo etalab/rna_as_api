@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RnaAsAPIInteractor do
+describe RNAAsAPIInteractor do
   context 'when outputing info' do
     it 'output the right format' do
       expect { described_class.new.stdout_info_log('tEsT MesSage') }.to output("------>  Test message\n").to_stdout

@@ -1,7 +1,7 @@
 require 'date'
 
 # Check if our stock links are legit and should be applied
-class StartImportIfNeeded < RnaAsAPIInteractor
+class StartImportIfNeeded < RNAAsAPIInteractor
   around do |interactor|
     stdout_info_log 'Checking which monthly stock to apply...'
 

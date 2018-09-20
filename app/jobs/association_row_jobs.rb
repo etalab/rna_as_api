@@ -1,4 +1,4 @@
-class AssociationRowJobs < RnaAsAPIInteractor
+class AssociationRowJobs < RNAAsAPIInteractor
   def fill_associations
     associations = []
     begin

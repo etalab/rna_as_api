@@ -1,4 +1,4 @@
-class ReencodeFile < RnaAsAPIInteractor
+class ReencodeFile < RNAAsAPIInteractor
   around do |interactor|
     @input_file = context.unzipped_files.first
     @output_file = @input_file.gsub('.csv', '_reencoded.csv')

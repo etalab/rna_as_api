@@ -1,4 +1,4 @@
-class SaveLastMonthlyStockNames < RnaAsAPIInteractor
+class SaveLastMonthlyStockNames < RNAAsAPIInteractor
   around do
     unless File.directory?(link_folder)
       FileUtils.mkdir(link_folder)
