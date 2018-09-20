@@ -17,7 +17,7 @@ gem 'rails', '~> 5.2.0'
 
 gem 'rack-cors'
 gem 'ruby-progressbar'
-gem 'rubyzip'
+gem 'rubyzip', '~> 1.2.2'
 gem 'smarter_csv'
 # Gem progress_bar required for displaying progress in rake sunspot:reindex
 gem 'progress_bar'

@@ -271,7 +271,7 @@ DEPENDENCIES
   rubocop-checkstyle_formatter
   rubocop-rspec
   ruby-progressbar
-  rubyzip
+  rubyzip (~> 1.2.2)
   simplecov
   simplecov-console
   smarter_csv

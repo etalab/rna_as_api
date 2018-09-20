@@ -8,6 +8,12 @@ Le projet RNA_as_api a pour vocation de mettre en valeur la donnée brute en la 
 
 Vous pouvez également consulter l'[API Sirene](https://github.com/betagouv/sirene_as_api).
 
+## Essayez l'API
+
+Vous pouvez interroger l'API en ligne: https://entreprise.data.gouv.fr/api/rna/v1/full_text/ + Nom de l'entreprise recherchée (cf. plus bas pour d'autres usages).
+
+Ou bien par le site front-end : https://entreprise.data.gouv.fr/
+
 ## Fonctionnement
 
 Cette API se connecte au dépot de fichiers sur [Data.gouv](https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/) et télécharge automatiquement les derniers fichiers du RNA.
