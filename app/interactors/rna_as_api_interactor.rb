@@ -1,4 +1,4 @@
-class RnaAsAPIInteractor
+class RNAAsAPIInteractor
   include Interactor
 
   def interactor_log

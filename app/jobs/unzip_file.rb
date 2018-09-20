@@ -1,6 +1,6 @@
 require 'zip'
 
-class UnzipFile < RnaAsAPIInteractor
+class UnzipFile < RNAAsAPIInteractor
   def call
     destination = 'tmp/files/'
 

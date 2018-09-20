@@ -5,12 +5,14 @@ sandbox:
     log_level: OFF
     path: /solr/sandbox
     memory: 2G
+
 production:
   solr:
     hostname: localhost
     port: 8993
     log_level: WARNING
     path: /solr/production
+    memory: 8G
 
 development:
   solr:

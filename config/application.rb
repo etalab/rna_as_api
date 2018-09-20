@@ -13,11 +13,14 @@ require 'rails/test_unit/railtie'
 
 Bundler.require(*Rails.groups)
 
-module RnaAsApi
+module RNAAsAPI
   class Application < Rails::Application
     config.api_only = true
     config.load_defaults 5.1
     config.active_record.schema_format = :sql
+
+    # Custom config
+    config.switch_server = config_for(:switch_server)
 
     config.autoload_paths +=
       %W[ #{config.root}/lib/
@@ -25,12 +28,5 @@ module RnaAsApi
           #{config.root}/app/interactors/organizers
           #{config.root}/app/interactors/jobs
           #{config.root}/app/solr]
-
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get]
-      end
-    end
   end
 end

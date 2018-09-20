@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class DownloadFile < RnaAsAPIInteractor
+class DownloadFile < RNAAsAPIInteractor
   around do |interactor|
     stdout_info_log "Attempting to download #{context.current_import}"
 

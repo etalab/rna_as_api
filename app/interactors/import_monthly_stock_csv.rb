@@ -1,4 +1,4 @@
-class ImportMonthlyStockCsv < RnaAsAPIInteractor
+class ImportMonthlyStockCsv < RNAAsAPIInteractor
   around do |interactor|
     stdout_info_log "Starting csv import of #{context.csv_filename}"
 

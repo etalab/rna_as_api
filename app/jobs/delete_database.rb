@@ -1,4 +1,4 @@
-class DeleteDatabase < RnaAsAPIInteractor
+class DeleteDatabase < RNAAsAPIInteractor
   def call
     DeleteDatabase.only_waldec if context.current_import == 'waldec'
     DeleteDatabase.only_import if context.current_import == 'import'

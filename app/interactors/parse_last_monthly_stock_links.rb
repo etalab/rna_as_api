@@ -1,6 +1,6 @@
 require 'date'
 
-class ParseLastMonthlyStockLinks < RnaAsAPIInteractor
+class ParseLastMonthlyStockLinks < RNAAsAPIInteractor
   around do |interactor|
     stdout_info_log 'Parsing monthly stocks...'
 

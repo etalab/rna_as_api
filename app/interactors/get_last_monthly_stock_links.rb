@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'net/http'
 
-class GetLastMonthlyStockLinks < RnaAsAPIInteractor
+class GetLastMonthlyStockLinks < RNAAsAPIInteractor
   around do |interactor|
     stdout_info_log "Visiting distant repository (#{files_domain})"
     fail_server_unavailable unless available?(files_domain)
