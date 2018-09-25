@@ -117,9 +117,9 @@ end
 task passenger: :remote_environment do
   comment 'Attempting to start Passenger app'.green
   command %{
-  if (sudo passenger-status | grep siade_#{ENV['to']}) >/dev/null
+  if (sudo passenger-status | grep rna_api_#{ENV['to']}) >/dev/null
   then
-    passenger-config restart-app /var/www/siade_#{ENV['to']}/current
+    passenger-config restart-app /var/www/rna_api_#{ENV['to']}/current
   else
     echo 'Skipping: no passenger app found (will be automatically loaded)'
   fi
