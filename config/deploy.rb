@@ -105,7 +105,7 @@ task warning_info: :local_environment do
   warning_sign = '\xE2\x9A\xA0'
   comment "#{warning_sign} #{warning_sign} #{warning_sign}".yellow
   comment "#{warning_sign} We assume the first import was done. If not run :".yellow
-  comment "RAILS_ENV=#{ENV['to']} bundle exec rake rna_as_api:import_last_monthly_stocks".yellow
+  comment "bundle exec rake rna_as_api:import_last_monthly_stocks RAILS_ENV=#{ENV['to']}".yellow
   comment "#{warning_sign} #{warning_sign} #{warning_sign}".yellow
 end
 
@@ -117,9 +117,9 @@ end
 task passenger: :remote_environment do
   comment 'Attempting to start Passenger app'.green
   command %{
-  if (sudo passenger-status | grep siade_#{ENV['to']}) >/dev/null
+  if (sudo passenger-status | grep rna_api_#{ENV['to']}) >/dev/null
   then
-    passenger-config restart-app /var/www/siade_#{ENV['to']}/current
+    passenger-config restart-app /var/www/rna_api_#{ENV['to']}/current
   else
     echo 'Skipping: no passenger app found (will be automatically loaded)'
   fi
