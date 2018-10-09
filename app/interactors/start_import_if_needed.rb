@@ -58,19 +58,17 @@ class StartImportIfNeeded < RNAAsAPIInteractor
   end
 
   def saved_last_waldec_date
-    path_to_save_file = SaveLastMonthlyStockNames.new.path_waldec
-    return Date.new unless File.exist?(path_to_save_file)
-
-    file_content = File.read(SaveLastMonthlyStockNames.new.path_waldec)
-    date = file_content.match('\d{8}').to_s
-    Date.parse(date)
+    saved_last_date(SaveLastMonthlyStockNames.new.path_waldec)
   end
 
   def saved_last_import_date
-    path_to_save_file = SaveLastMonthlyStockNames.new.path_import
+    saved_last_date(SaveLastMonthlyStockNames.new.path_import)
+  end
+
+  def saved_last_date(path_to_save_file)
     return Date.new unless File.exist?(path_to_save_file)
 
-    file_content = File.read(SaveLastMonthlyStockNames.new.path_import)
+    file_content = File.read(path_to_save_file)
     date = file_content.match('\d{8}').to_s
     Date.parse(date)
   end

@@ -18,14 +18,14 @@ class DeleteDatabase < RNAAsAPIInteractor
   def self.only_waldec
     RNAAsAPIInteractor.new.stdout_info_log 'Database waldec will be deleted'
     File.delete(SaveLastMonthlyStockNames.new.path_waldec) if File.exist?(SaveLastMonthlyStockNames.new.path_waldec)
-    Association.where(is_waldec: true).delete_all
+    Association.where(is_waldec: 'true').delete_all
     RNAAsAPIInteractor.new.stdout_success_log 'Database waldec successfully deleted'
   end
 
   def self.only_import
     RNAAsAPIInteractor.new.stdout_info_log 'Database import will be deleted'
     File.delete(SaveLastMonthlyStockNames.new.path_import) if File.exist?(SaveLastMonthlyStockNames.new.path_import)
-    Association.where(is_waldec: false).delete_all
+    Association.where(is_waldec: 'false').delete_all
     RNAAsAPIInteractor.new.stdout_success_log 'Database import successfully deleted'
   end
 end
