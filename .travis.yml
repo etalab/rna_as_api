@@ -1,26 +1,28 @@
+---
 language: ruby
 rbenv:
-- 1.1.1
+  - 1.1.1
 cache: bundler
 jdk:
-- openjdk8
+  - openjdk8
 services:
   - postgresql
 env:
   matrix:
-  - DB=postgresql
-  - secure: tD+mAI0thqThfekEItUwsM/7+bPtiD2k5wC9uHbC4gOVO2i5IXJ5vaghWj8ClCBzzpwl4ckFg0vVDcKB76h1CzZ+wj7tOa+OZeVnI77zyIQMDkZlSCwFZ3iHni4m/GfoWCeyMwTFOEgNKm1OqdYtBVFzCuw7uU7LYZGC+BzfaZQNDZg6t4gSohnp+Je1gzXShBFZ6ZSfLjdCzlFoICIbHmnARkEVgPCFTi4lbECGZF5GuMvYPKD6H+E6163Gb/FzgQoHwLgoQdRRMkqcn+3/UO/RerMB/t1sNTu9fqsBTmLTI1EJUiqxkRz4Xh1J1EjWv5bB2377h7mKNHf8dJhOAG7u+n8Xjfqf//m084Gt+WC5wfbojhYo8MTHe5H83QIxhA2rRScFo/TQDvGMZDByIXN3Vlb0pdcGNtKsbZMUxuB4LOzoxgFfIACo1vC//pPrTO0mcSv90XcWFCuwP7BlHOgzydWm7xQidy5WlNNwze1dyRfmzb4SOQH++uilAhmicPAgjPkNQf/E5gf7VsfjUczrln1s6hGw1bZf5ehO9NZNAjothCu7pSRq7A1huf3bxaXmVU5Zs52dka9w8HddMbMsjEvkqEWlXVMmbzuFnYc/0ttGyv6NSGnrfyffjLkkJPX1AbB0w7B/IiLpgaq0H/yYV+Z36nHG3n7tWveK6L8=
+    - DB=postgresql
+    - secure: tD+mAI0thqThfekEItUwsM/7+bPtiD2k5wC9uHbC4gOVO2i5IXJ5vaghWj8ClCBzzpwl4ckFg0vVDcKB76h1CzZ+wj7tOa+OZeVnI77zyIQMDkZlSCwFZ3iHni4m/GfoWCeyMwTFOEgNKm1OqdYtBVFzCuw7uU7LYZGC+BzfaZQNDZg6t4gSohnp+Je1gzXShBFZ6ZSfLjdCzlFoICIbHmnARkEVgPCFTi4lbECGZF5GuMvYPKD6H+E6163Gb/FzgQoHwLgoQdRRMkqcn+3/UO/RerMB/t1sNTu9fqsBTmLTI1EJUiqxkRz4Xh1J1EjWv5bB2377h7mKNHf8dJhOAG7u+n8Xjfqf//m084Gt+WC5wfbojhYo8MTHe5H83QIxhA2rRScFo/TQDvGMZDByIXN3Vlb0pdcGNtKsbZMUxuB4LOzoxgFfIACo1vC//pPrTO0mcSv90XcWFCuwP7BlHOgzydWm7xQidy5WlNNwze1dyRfmzb4SOQH++uilAhmicPAgjPkNQf/E5gf7VsfjUczrln1s6hGw1bZf5ehO9NZNAjothCu7pSRq7A1huf3bxaXmVU5Zs52dka9w8HddMbMsjEvkqEWlXVMmbzuFnYc/0ttGyv6NSGnrfyffjLkkJPX1AbB0w7B/IiLpgaq0H/yYV+Z36nHG3n7tWveK6L8=
 before_install:
   - gem install -v 1.16.6 bundler --no-rdoc --no-ri
 script:
-- bundle exec rspec
+  - bundle exec rubocop
+  - bundle exec rspec
 before_script:
-- psql -U postgres -f postgresql_setup.txt
-- RAILS_ENV=test bundle exec rails db:migrate
-- RAILS_ENV=test bundle exec rake sunspot:solr:start
-- sleep 30
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
-- "./cc-test-reporter before-build"
+  - psql -U postgres -f postgresql_setup.txt
+  - RAILS_ENV=test bundle exec rails db:migrate
+  - RAILS_ENV=test bundle exec rake sunspot:solr:start
+  - sleep 30
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - "./cc-test-reporter before-build"
 after_script:
-- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
