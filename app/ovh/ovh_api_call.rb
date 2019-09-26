@@ -34,6 +34,7 @@ class OvhAPICall < RNAAsAPIInteractor
   def build_request
     return request_get if @method == 'GET'
     return request_post if @method == 'POST'
+
     raise 'Error : method parameter should be GET or POST'
   end
 

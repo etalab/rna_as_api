@@ -13,8 +13,8 @@ class TestSelfServer < RNAAsAPIInteractor
     test_results = JSON.parse(execute_test)
 
     return context.fail! unless test_results && test_results['total_results'] > 6_000
-    context.success!
 
+    context.success!
   rescue StandardError => error
     stdout_error_log "Couldn't parse API result : #{error}"
     context.fail!
