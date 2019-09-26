@@ -17,7 +17,7 @@ class DownloadFile < RNAAsAPIInteractor
 
   def call
     # Security risk : replace value
-    download = open(link_to_import[:link])
+    download = URI.parse(link_to_import[:link]).open
     IO.copy_stream(download, context.filepath)
   end
 

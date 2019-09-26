@@ -94,8 +94,10 @@ task :deploy do
 end
 
 task whenever_update: :remote_environment do
-  set :whenever_name, "rna_api_#{ENV['to']}" # default value is based on domain name, and it is used to match in crontab !
-  set :bundle_bin, '/usr/local/rbenv/shims/bundle' # with our rbenv config it cannot be found...
+  # default value is based on domain name, and it is used to match in crontab !
+  set :whenever_name, "rna_api_#{ENV['to']}"
+  # with our rbenv config it cannot be found...
+  set :bundle_bin, '/usr/local/rbenv/shims/bundle'
 
   invoke :'whenever:update'
 end
