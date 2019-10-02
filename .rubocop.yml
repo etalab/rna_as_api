@@ -1,6 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.5.1
   Exclude:
+    - 'vendor/**/*'
     - 'Guardfile'
     - 'db/migrate/*'
     - 'bin/*'
@@ -17,6 +18,11 @@ Metrics/BlockLength:
     - 'spec/controllers/api/v1/*'
     - 'db/schema.rb'
 
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - 'app/jobs/unzip_file.rb'
+
 Documentation:
   Enabled: false
 
@@ -25,6 +31,9 @@ Style/FrozenStringLiteralComment:
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+  Exclude:
+    - 'app/channels/**/*'
+    - 'config/application.rb'
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:

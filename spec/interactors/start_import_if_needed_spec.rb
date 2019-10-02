@@ -8,5 +8,5 @@ describe StartImportIfNeeded do
     end
   end
 
-  # TODO rest of the tests
+  # TODO: rest of the tests
 end

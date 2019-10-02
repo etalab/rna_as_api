@@ -16,7 +16,6 @@ RSpec::Matchers.define :be_not_found_payload do
   end
 end
 
-
 RSpec::Matchers.define :find_one_association_with_id_1 do
   match do |response|
     expect(results_no_associations).to match(

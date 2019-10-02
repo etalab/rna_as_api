@@ -19,6 +19,7 @@ describe ImportMonthlyStockCsv do
       described_class.call(current_import: 'waldec', csv_filename: sample_file)
     end
   end
+
   context 'when importing import file' do
     it 'succeed' do
       expected_query_string = File.read('spec/fixtures/sample_files/query_string_rna_sample_import.txt')
