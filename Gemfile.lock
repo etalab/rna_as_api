@@ -128,7 +128,7 @@ GEM
       pry (~> 0.10)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.6)
     rack-cors (1.0.2)
     rack-test (1.1.0)
@@ -264,7 +264,7 @@ DEPENDENCIES
   progress_bar
   pry
   pry-byebug
-  puma (~> 3.7)
+  puma (~> 3.12)
   rack-cors
   rails (~> 5.2.0)
   rspec-rails (~> 3.7.2)
