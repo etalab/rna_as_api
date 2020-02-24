@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe SaveLastMonthlyStockNames do
+  include_context 'mute interactors'
+
   before(:all) do
     @test_folder = 'spec/fixtures/save_link_folder'
     @full_path_waldec = "#{@test_folder}/test_file_waldec.txt"

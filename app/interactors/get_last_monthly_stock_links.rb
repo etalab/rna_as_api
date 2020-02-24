@@ -45,7 +45,7 @@ class GetLastMonthlyStockLinks < RNAAsAPIInteractor
   end
 
   def available_rna_links
-    doc = Nokogiri::HTML(open(files_repository))
+    doc = Nokogiri::HTML files_uri.open
     links_nodes = doc.css('a')
     links = links_nodes.map { |e| e['href'] }.compact
     links.select { |e| e.start_with?(link_filename_pattern) }
@@ -59,6 +59,10 @@ class GetLastMonthlyStockLinks < RNAAsAPIInteractor
         response['location']
       end
     end
+  end
+
+  def files_uri
+    URI.parse files_repository
   end
 
   def files_domain

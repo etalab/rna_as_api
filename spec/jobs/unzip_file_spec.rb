@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe UnzipFile do
+  include_context 'mute interactors'
+
   patch_filepath = 'spec/fixtures/sample_files/sample.zip'
   patch_filename = 'sample.csv'
   expected_unzipped_file_path = "tmp/files/#{patch_filename}"

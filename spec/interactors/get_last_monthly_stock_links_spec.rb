@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe GetLastMonthlyStockLinks do
+  include_context 'mute interactors'
+
   subject(:context) { described_class.call }
 
   context 'when file server is down', vcr: { cassette_name: 'rna_server_KO', allow_playback_repeats: true } do

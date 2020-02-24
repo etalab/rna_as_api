@@ -2,7 +2,7 @@ class RNAAsAPIInteractor
   include Interactor
 
   def interactor_log
-    log ||= Logger.new("#{Rails.root}/log/interactor.log")
+    @interactor_log ||= Logger.new("#{Rails.root}/log/interactor.log")
   end
 
   def log_prefix

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/betagouv/rna_as_api.svg?branch=master)](https://travis-ci.org/betagouv/rna_as_api) [![Maintainability](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/maintainability)](https://codeclimate.com/github/betagouv/rna_as_api/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/1151a3c44866b36b78c8/test_coverage)](https://codeclimate.com/github/betagouv/rna_as_api/test_coverage)
+[![Build Status](https://travis-ci.org/etalab/rna_as_api.svg?branch=master)](https://travis-ci.org/etalab/rna_as_api)
 
 # RNA as API
 
@@ -148,6 +148,14 @@ Dans certains cas, le déploiement par Mina ne copie pas correctement les fichie
 En cas d'erreur 404 - Solr not found, assurez vous que le fichier /solr/MonEnvironnement/core.properties est bien présent. Sinon, vous pouvez l'ajouter manuellement.
 
 Si tout fonctionne sauf les suggestions, c'est probablement que le dictionnaire de suggestions n'a pas été construit. Executez la commande : `RAILS_ENV=MonEnvironnement bundle exec rake sirene_as_api:build_dictionary`
+
+# Documentation des variables du RNA
+
+Les fichiers RNA sont disponibles sur [la page data.gouv dédiée aux données brutes du RNA]( https://www.data.gouv.fr/en/datasets/repertoire-national-des-associations/)
+
+Cette page permet de télécharger la documentation du ministère de l'intérieur. La description des variables est cependant un peu sommaire (voir, dans le cas de "siteweb", "email", et variables géographiques, manquante). Une meilleure documentation peut se trouver dans les ressources communautaires data.gouv. Vous pouvez trouver une description plus détaillée des variables, ainsi que les nomenclatures complètes des codes objets sociaux pour les associations des fichiers Waldec et Import.
+
+Vous pouvez également prendre contact avec le greffier des associations à la prefecture de votre région, ou avec le ministère de l'intérieur qui gère le RNA.
 
 # License
 

@@ -1,12 +1,13 @@
 AllCops:
   TargetRubyVersion: 2.5.1
   Exclude:
+    - 'vendor/**/*'
     - 'Guardfile'
     - 'db/migrate/*'
     - 'bin/*'
     - 'config/initializers/*'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Metrics/BlockLength:
@@ -17,7 +18,12 @@ Metrics/BlockLength:
     - 'spec/controllers/api/v1/*'
     - 'db/schema.rb'
 
-Documentation:
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - 'app/jobs/unzip_file.rb'
+
+Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
@@ -25,7 +31,19 @@ Style/FrozenStringLiteralComment:
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+  Exclude:
+    - 'app/channels/**/*'
+    - 'config/application.rb'
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     default: '{}'
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

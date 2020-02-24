@@ -1,21 +1,32 @@
 require 'rails_helper'
 
 describe ReencodeFile do
+  include_context 'mute interactors'
+
   context 'When reencoding a file' do
-    path_to_test_csv = 'spec/fixtures/sample_files/reencode_test.csv'
-    expected_reencoded_path = 'spec/fixtures/sample_files/reencode_test_reencoded.csv'
+    subject { described_class.call(unzipped_files: [path_to_test_csv, path_to_test_csv]) }
 
-    before(:all) do
-      File.delete(expected_reencoded_path) if File.exist?(expected_reencoded_path)
+    let(:path_to_test_csv) { 'spec/fixtures/sample_files/reencode_test.csv' }
+    let(:expected_reencoded_path_regex) { 'spec/fixtures/sample_files/reencode_test_*_reencoded.csv' }
+    let(:files_on_disk) { Dir[expected_reencoded_path_regex] }
+
+    after do
+      FileUtils.rm_rf(files_on_disk)
     end
 
-    after(:all) do
-      File.delete(expected_reencoded_path)
+    it 'generates 2 reencoded files on disk' do
+      subject
+      expect(files_on_disk.count).to eq 2
     end
 
-    it 'succeed' do
-      described_class.call(unzipped_files: [path_to_test_csv])
-      expect(File.read(expected_reencoded_path).encoding.name).to eq('UTF-8')
+    it 'generated files are correcly encoded' do
+      files_on_disk.each do |filename|
+        expect(File.read(filename).encoding.name).to eq('UTF-8')
+      end
+    end
+
+    it 'reencoded files are set in ouput' do
+      expect(subject.csv_filenames).to match_array files_on_disk
     end
   end
 end

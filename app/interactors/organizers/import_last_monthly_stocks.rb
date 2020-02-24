@@ -1,5 +1,5 @@
 class ImportLastMonthlyStocks
   include Interactor::Organizer
 
-  organize GetLastMonthlyStockLinks, ParseLastMonthlyStockLinks, StartImportIfNeeded, SolrReindex
+  organize GetLastMonthlyStockLinks, ParseLastMonthlyStockLinks, StartImportIfNeeded, SolrReindex, DeleteTemporaryFiles
 end

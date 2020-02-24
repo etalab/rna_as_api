@@ -1,13 +1,16 @@
 class ImportMonthlyStockCsv < RNAAsAPIInteractor
   around do |interactor|
-    stdout_info_log "Starting csv import of #{context.csv_filename}"
+    context.csv_filenames.each do |csv_filename|
+      @csv_filename = csv_filename
+      stdout_info_log "Starting csv import of #{@csv_filename}"
 
-    compute_row_number
+      compute_row_number
 
-    stdout_info_log 'Importing rows...'
+      stdout_info_log 'Importing rows...'
 
-    quietly do
-      interactor.call
+      quietly do
+        interactor.call
+      end
     end
   end
 
@@ -18,15 +21,15 @@ class ImportMonthlyStockCsv < RNAAsAPIInteractor
 
   private
 
-  def create_progressbar(context)
+  def create_progressbar(_context)
     ProgressBar.create(
-      total: context.number_of_rows,
+      total: @number_of_rows,
       format: 'Progress %c/%C (%P %%) |%b>%i| %a %e'
     )
   end
 
   def process_csv_job(context, progress_bar)
-    SmarterCSV.process(context.csv_filename, csv_options) do |chunk|
+    SmarterCSV.process(@csv_filename, csv_options) do |chunk|
       InsertAssociationRowsJob.new(chunk, context.current_import).perform
       chunk.size.times { progress_bar.increment }
     end
@@ -45,8 +48,8 @@ class ImportMonthlyStockCsv < RNAAsAPIInteractor
 
   def compute_row_number
     stdout_info_log 'Computing number of rows...'
-    context.number_of_rows = `wc -l #{context.csv_filename}`.split.first.to_i - 1
-    stdout_success_log "Found #{context.number_of_rows} rows to import"
+    @number_of_rows = `wc -l #{@csv_filename}`.split.first.to_i - 1
+    stdout_success_log "Found #{@number_of_rows} rows to import"
   end
 
   def quietly
