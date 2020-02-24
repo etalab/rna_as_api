@@ -6,8 +6,8 @@ class AssociationRowJobs < RNAAsAPIInteractor
         associations << AssociationWaldecAttrsFromLine.instance.call(line) if current_import == 'waldec'
         associations << AssociationImportAttrsFromLine.instance.call(line) if current_import == 'import'
       end
-    rescue StandardError => error
-      stdout_error_log "Error: Could not finish the import task. Cause: #{error.class}"
+    rescue StandardError => e
+      stdout_error_log "Error: Could not finish the import task. Cause: #{e.class}"
       exit
     end
 

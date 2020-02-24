@@ -25,8 +25,8 @@ class InsertAssociationRowsJob < AssociationRowJobs
 
   def insert_into_database(ar_query_string)
     ActiveRecord::Base.connection.execute(ar_query_string)
-  rescue StandardError => error
-    stdout_error_log "Error: Cannot insert association attributes. Cause : #{error.class}
+  rescue StandardError => e
+    stdout_error_log "Error: Cannot insert association attributes. Cause : #{e.class}
       Make sure that your Solr server is launched for the right environment and accessible."
     exit
   end

@@ -7,7 +7,7 @@ AllCops:
     - 'bin/*'
     - 'config/initializers/*'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Metrics/BlockLength:
@@ -23,7 +23,7 @@ Metrics/MethodLength:
   Exclude:
     - 'app/jobs/unzip_file.rb'
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
@@ -38,3 +38,12 @@ Style/ClassAndModuleChildren:
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     default: '{}'
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
