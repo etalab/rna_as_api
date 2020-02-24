@@ -16,12 +16,12 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'vcr'
+require 'factory_bot'
 
 # Test coverage options (activated only if rspec is run without arguments)
 if ARGV.grep(/spec\.rb/).empty?
   require 'simplecov'
   require 'simplecov-console'
-  require 'factory_bot'
   SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
   SimpleCov.start 'rails' do
     add_filter '/app/channels/'
@@ -48,20 +48,6 @@ VCR.configure do |config|
 end
 
 RSpec.configure do |config|
-  # Silence output during tests
-
-  original_stderr = $stderr
-  original_stdout = $stdout
-  config.before(:all) do
-    # Redirect stderr and stdout
-    $stderr = File.open(File::NULL, 'w')
-    $stdout = File.open(File::NULL, 'w')
-  end
-  config.after(:all) do
-    $stderr = original_stderr
-    $stdout = original_stdout
-  end
-
   # FactoryBot methods
   config.include FactoryBot::Syntax::Methods
 

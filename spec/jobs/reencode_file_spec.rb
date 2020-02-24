@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ReencodeFile do
+  include_context 'mute interactors'
+
   context 'When reencoding a file' do
     path_to_test_csv = 'spec/fixtures/sample_files/reencode_test.csv'
     expected_reencoded_path = 'spec/fixtures/sample_files/reencode_test_reencoded.csv'
