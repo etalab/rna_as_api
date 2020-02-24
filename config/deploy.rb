@@ -43,6 +43,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   'log',
   '.last_monthly_stocks_applied',
   'tmp/pids',
+  'tmp/files',
   'tmp/cache',
   'solr/pids',
   "solr/#{ENV['to']}"
