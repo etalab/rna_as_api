@@ -10,7 +10,7 @@ describe DeleteTemporaryFiles do
   before do
     allow_any_instance_of(described_class).to receive(:temp_files_location).and_return temp_folder
 
-    (1..5).each do
+    5.times do
       FileUtils.touch "#{temp_folder}/rna_import_#{SecureRandom.hex(5)}_test.txt"
       FileUtils.touch "#{temp_folder}/rna_waldec_#{SecureRandom.hex(5)}_test.txt"
     end
@@ -18,16 +18,16 @@ describe DeleteTemporaryFiles do
 
   it 'does not delete everything' do
     described_class.call
-    expect(temp_files).to include %r{file_not_to_delete}
+    expect(temp_files).to include(/file_not_to_delete/)
   end
 
   it 'deletes rna_import files' do
     described_class.call
-    expect(temp_files).not_to include %r{rna_import}
+    expect(temp_files).not_to include(/rna_import/)
   end
 
   it 'deletes rna_import files' do
     described_class.call
-    expect(temp_files).not_to include %r{rna_waldec}
+    expect(temp_files).not_to include(/rna_waldec/)
   end
 end

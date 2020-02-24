@@ -21,7 +21,7 @@ class ImportMonthlyStockCsv < RNAAsAPIInteractor
 
   private
 
-  def create_progressbar(context)
+  def create_progressbar(_context)
     ProgressBar.create(
       total: @number_of_rows,
       format: 'Progress %c/%C (%P %%) |%b>%i| %a %e'
