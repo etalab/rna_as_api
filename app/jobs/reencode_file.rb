@@ -1,17 +1,22 @@
 class ReencodeFile < RNAAsAPIInteractor
   around do |interactor|
-    @input_file = context.unzipped_files.first
-    @output_file = @input_file.gsub('.csv', '_reencoded.csv')
+    context.csv_filenames = []
 
-    stdout_info_log "Converting #{@input_file} to correct encoding..."
+    context.unzipped_files.each do |unzipped_file|
+      @input_file = unzipped_file
+      @output_file = @input_file.gsub('.csv', "_#{secure_token}_reencoded.csv")
 
-    if File.exist?(@output_file)
-      stdout_warn_log "#{@output_file} already exists ! Skipping reencoding"
-    else
-      interactor.call
-      stdout_success_log "File #{@input_file} converted correctly to #{@output_file} !"
+      stdout_info_log "Converting #{@input_file} to correct encoding..."
+
+      if File.exist?(@output_file)
+        stdout_warn_log "#{@output_file} already exists ! Skipping reencoding"
+      else
+        interactor.call
+        stdout_success_log "File #{@input_file} converted correctly to #{@output_file} !"
+      end
+
+      context.csv_filenames << @output_file
     end
-    context.csv_filename = @output_file
   end
 
   def call
@@ -26,6 +31,10 @@ class ReencodeFile < RNAAsAPIInteractor
   end
 
   private
+
+  def secure_token
+    SecureRandom.hex(5)
+  end
 
   def encode_with_options(line)
     line.encode(

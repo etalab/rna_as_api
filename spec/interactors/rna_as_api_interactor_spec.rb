@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe RNAAsAPIInteractor do
+  include_context 'mute interactors'
+
   context 'when outputing info' do
     it 'output the right format' do
       expect { described_class.new.stdout_info_log('tEsT MesSage') }

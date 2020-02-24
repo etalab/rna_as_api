@@ -26,6 +26,7 @@ gem 'progress_bar'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
+gem 'json'
 gem 'whenever'
 
 group :development, :test do

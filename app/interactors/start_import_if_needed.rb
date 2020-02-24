@@ -46,7 +46,7 @@ class StartImportIfNeeded < RNAAsAPIInteractor
   end
 
   def check_if_one_waldec_and_one_import
-    if context.link_import.nil? || context.link_waldec.nil? # rubocop:disable GuardClause
+    if context.link_import.nil? || context.link_waldec.nil? # rubocop:disable Style/GuardClause
       stdout_error_log 'Error: one of the links seems to be missing.'
       context.fail!
     end

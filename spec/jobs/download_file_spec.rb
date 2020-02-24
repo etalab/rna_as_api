@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe DownloadFile do
+  include_context 'mute interactors'
+
   let(:dummy_link) { 'http://www.dummy_link.com' }
   let(:dummy_download) { 'dummy_download' }
 

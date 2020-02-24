@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ParseLastMonthlyStockLinks do
+  include_context 'mute interactors'
+
   context 'when parsing the links' do
     subject(:context) do
       described_class.call(links: ['https://media.interieur.gouv.fr/rna/rna_waldec_20180801.zip',
