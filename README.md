@@ -6,7 +6,7 @@ Dans le cadre du [Service Public de la Donnée](https://www.data.gouv.fr/fr/refe
 
 Le projet RNA_as_api a pour vocation de mettre en valeur la donnée brute en la servant sous forme d'API.
 
-Vous pouvez également consulter l'[API Sirene](https://github.com/betagouv/sirene_as_api).
+Vous pouvez également consulter l'[API Sirene](https://github.com/etalab/sirene_as_api).
 
 ## Essayez l'API
 
@@ -31,11 +31,11 @@ Pour une installation manuelle, vous aurez besoin de :
 - postgresql en version supérieure a 9.5
 - ruby en version 2.5.1
 - git
-- un runtime java pour solr (comme OpenJDK)
+- un runtime java pour solr (comme OpenJDK) - version 8 (dépendance Solr)
 
 Clonez ce répertoire :
 
-    git clone git@github.com:betagouv/rna_as_api.git && cd rna_as_api
+    git clone git@github.com:etalab/rna_as_api.git && cd rna_as_api
 
 Installez les dépendances :
 
@@ -44,7 +44,7 @@ Installez les dépendances :
 Preparez la base de données postgres :
 
     sudo -u postgres -i
-    cd /path/vers/dossier/sirene_as_api
+    cd /path/vers/dossier/rna_as_api
     psql -f postgresql_setup.txt
 
 Lancez les migrations :
@@ -138,6 +138,8 @@ Cette requête renvoie uniquement la fiche association correspondant au Siret. A
 
 # Problèmes fréquents
 
+La version utilisée de Solr fonctionne avec OpenJDK 8.
+
 Si l'API ne renvoie aucun résultat sur la recherche `fulltext` mais que la recherche `siret` fonctionne, vous avez sans doute besoin de réindexer. Tentez `RAILS_ENV=MonEnvironnement bundle exec rake sunspot:solr:reindex` (le server solr doit être actif).
 
 En cas de problèmes avec le serveur solr, il peut être nécessaire de tuer les processus Solr en cours (obtenir le PID solr avec `ps aux | grep solr` puis les tuer avec la commande `kill MonPidSolr`). Relancer le serveur avec `RAILS_ENV=MonEnvironnement bundle exec rake sunspot:solr:start` suffit en général à corriger la situation.
@@ -146,8 +148,6 @@ Si Solr renvoie toujours des erreurs, c'est peut-être un problème causé par u
 
 Dans certains cas, le déploiement par Mina ne copie pas correctement les fichiers solr.
 En cas d'erreur 404 - Solr not found, assurez vous que le fichier /solr/MonEnvironnement/core.properties est bien présent. Sinon, vous pouvez l'ajouter manuellement.
-
-Si tout fonctionne sauf les suggestions, c'est probablement que le dictionnaire de suggestions n'a pas été construit. Executez la commande : `RAILS_ENV=MonEnvironnement bundle exec rake sirene_as_api:build_dictionary`
 
 # Documentation des variables du RNA
 
