@@ -4,11 +4,6 @@ namespace :rna_as_api do
     ImportLastMonthlyStocks.call
   end
 
-  desc 'Update only if this server is not in use'
-  task safe_update: :environment do
-    SafeUpdate.call
-  end
-
   namespace :delete_database do
     desc 'Delete database'
     task all: :environment do
