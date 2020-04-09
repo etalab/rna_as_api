@@ -44,9 +44,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   '.last_monthly_stocks_applied',
   'tmp/pids',
   'tmp/files',
-  'tmp/cache',
-  'solr/pids',
-  "solr/#{ENV['to']}"
+  'tmp/cache'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
