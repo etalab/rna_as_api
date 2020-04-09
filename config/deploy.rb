@@ -51,7 +51,8 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
 
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml',
-  'config/secrets.yml'
+  'config/secrets.yml',
+  'config/sunspot.yml'
 )
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
