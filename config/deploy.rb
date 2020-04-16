@@ -112,7 +112,7 @@ end
 
 task solr: :remote_environment do
   comment 'Restarting Solr service'.green
-  command "sudo systemctl restart solr_rna_api_#{ENV['to']}"
+  command 'sudo systemctl restart solr'
 end
 
 task passenger: :remote_environment do
