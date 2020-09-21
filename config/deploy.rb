@@ -44,14 +44,13 @@ set :shared_dirs, fetch(:shared_dirs, []).push(
   '.last_monthly_stocks_applied',
   'tmp/pids',
   'tmp/files',
-  'tmp/cache',
-  'solr/pids',
-  "solr/#{ENV['to']}"
+  'tmp/cache'
 )
 
 set :shared_files, fetch(:shared_files, []).push(
   'config/database.yml',
-  'config/secrets.yml'
+  'config/secrets.yml',
+  'config/sunspot.yml'
 )
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
@@ -113,7 +112,7 @@ end
 
 task solr: :remote_environment do
   comment 'Restarting Solr service'.green
-  command "sudo systemctl restart solr_rna_api_#{ENV['to']}"
+  command 'sudo systemctl restart solr'
 end
 
 task passenger: :remote_environment do
