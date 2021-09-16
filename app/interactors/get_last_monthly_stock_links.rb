@@ -16,10 +16,8 @@ class GetLastMonthlyStockLinks < RNAAsAPIInteractor
     end
   end
 
-  # Example adress : https://www.data.gouv.fr/fr/datasets/r/cca7b7f6-8a96-4ef8-9e44-54e9173d82f9
-  # Parse all links, get first two, it should always be one waldec and one import (random order)
   def call
-    last_two_stock_month_link_redirected = available_rna_links.first(2)
+    last_two_stock_month_link_redirected = available_rna_links.first(4).uniq
     last_two_stock_month_link = get_redirection(last_two_stock_month_link_redirected)
     context.links = last_two_stock_month_link
   end
