@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rails', '~> 5.2'
+
 gem 'colorize'
 gem 'interactor', '~> 3.1.0'
 
@@ -13,7 +15,6 @@ gem 'logstasher'
 
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.2.0'
 
 gem 'rack-cors'
 gem 'ruby-progressbar'
