@@ -52,6 +52,16 @@ set :shared_files, fetch(:shared_files, []).push(
   'config/secrets.yml',
   'config/sunspot.yml'
 )
+
+def samhain_db_update
+  samhain_listfile = "/tmp/listfile-#{SecureRandom.hex(48)}"
+
+  comment %{Updating Samhain signature database}
+  command %{find "/var/www/rna_api_#{ENV['to']}" >#{samhain_listfile}}
+  command %{sudo /usr/local/sbin/update-samhain-db.sh #{samhain_listfile}}
+  command %{rm -f #{samhain_listfile}}
+end
+
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
 task :remote_environment do
@@ -64,6 +74,7 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # Production database has to be setup !
+  samhain_db_update
 end
 
 desc 'Deploys the current version to the server.'
@@ -91,6 +102,7 @@ task :deploy do
       invoke :warning_info
     end
   end
+  samhain_db_update
 end
 
 task whenever_update: :remote_environment do
