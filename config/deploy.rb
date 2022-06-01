@@ -13,7 +13,6 @@ raise("target environment (#{ENV['to']}) not in the list") unless %w[sandbox pro
 print "Deploy to #{ENV['to']} environment\n".green
 
 set :commit, ENV['commit']
-set :user, 'deploy'
 set :application_name, 'rna_api'
 set :domain, ENV['domain']
 
@@ -53,13 +52,8 @@ set :shared_files, fetch(:shared_files, []).push(
   'config/sunspot.yml'
 )
 
-def samhain_db_update
-  samhain_listfile = "/tmp/listfile-#{SecureRandom.hex(48)}"
-
-  comment %{Updating Samhain signature database}
-  command %{find "/var/www/rna_api_#{ENV['to']}" >#{samhain_listfile}}
-  command %{sudo /usr/local/sbin/update-samhain-db.sh #{samhain_listfile}}
-  command %{rm -f #{samhain_listfile}}
+task :samhain_db_update do
+  command %{sudo /usr/local/sbin/update-samhain-db.sh "#{fetch(:deploy_to)}"}
 end
 
 # This task is the environment that is loaded for all remote run commands, such as
@@ -74,7 +68,8 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # Production database has to be setup !
-  samhain_db_update
+  invoke :'ownership'
+  invoke :'samhain_db_update'
 end
 
 desc 'Deploys the current version to the server.'
@@ -88,6 +83,7 @@ task :deploy do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'deploy:cleanup'
+    invoke :'ownership'
 
     on :launch do
       in_path(fetch(:current_path)) do
@@ -95,6 +91,7 @@ task :deploy do
         command %{touch tmp/restart.txt}
 
         invoke :whenever_update
+        invoke :'ownership'
         invoke :solr
       end
 
@@ -102,7 +99,7 @@ task :deploy do
       invoke :warning_info
     end
   end
-  samhain_db_update
+  invoke :'samhain_db_update'
 end
 
 task whenever_update: :remote_environment do
@@ -132,9 +129,13 @@ task passenger: :remote_environment do
   command %{
   if (sudo passenger-status | grep rna_api_#{ENV['to']}) >/dev/null
   then
-    passenger-config restart-app /var/www/rna_api_#{ENV['to']}/current
+    sudo passenger-config restart-app /var/www/rna_api_#{ENV['to']}/current
   else
     echo 'Skipping: no passenger app found (will be automatically loaded)'
   fi
   }
+end
+
+task :ownership do
+  command %{sudo chown -R deploy "#{fetch(:deploy_to)}"}
 end
