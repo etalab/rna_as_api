@@ -13,8 +13,8 @@ describe GetLastMonthlyStockLinks do
 
   context 'when parsing the webpage', vcr: { cassette_name: 'rna_server_webpage', allow_playback_repeats: true } do
     it 'gets the redicted links' do
-      expect(context.links).to eq(['https://media.interieur.gouv.fr/rna/rna_waldec_20180801.zip',
-                                   'https://media.interieur.gouv.fr/rna/rna_waldec_20180801.zip'])
+      expect(context.links).to eq(['https://media.interieur.gouv.fr/rna/rna_import_20220501.zip',
+                                   'https://media.interieur.gouv.fr/rna/rna_waldec_20220501.zip'])
     end
   end
 end
