@@ -29,7 +29,7 @@ Les fichiers RNA vont par paire Waldec / Import :
 Pour une installation manuelle, vous aurez besoin de :
 
 - postgresql en version supérieure a 9.5
-- ruby en version 2.5.1
+- ruby en version 2.6.10
 - git
 - un runtime java pour solr (comme OpenJDK) - version 8 (dépendance Solr)
 
@@ -117,7 +117,7 @@ Ces attributs peuvents être modifiés en passant en paramètres `page` et `per_
 L'API renvoie les réponses au format JSON avec les attributs suivant :
 
 | Attribut      | Valeur                       |
-|---------------|------------------------------|
+| ------------- | ---------------------------- |
 | total_results | Total résultats              |
 | total_pages   | Total de pages               |
 | per_page      | Nombre de résultats par page |
@@ -151,7 +151,7 @@ En cas d'erreur 404 - Solr not found, assurez vous que le fichier /solr/MonEnvir
 
 # Documentation des variables du RNA
 
-Les fichiers RNA sont disponibles sur [la page data.gouv dédiée aux données brutes du RNA]( https://www.data.gouv.fr/en/datasets/repertoire-national-des-associations/)
+Les fichiers RNA sont disponibles sur [la page data.gouv dédiée aux données brutes du RNA](https://www.data.gouv.fr/en/datasets/repertoire-national-des-associations/)
 
 Cette page permet de télécharger la documentation du ministère de l'intérieur. La description des variables est cependant un peu sommaire (voir, dans le cas de "siteweb", "email", et variables géographiques, manquante). Une meilleure documentation peut se trouver dans les ressources communautaires data.gouv. Vous pouvez trouver une description plus détaillée des variables, ainsi que les nomenclatures complètes des codes objets sociaux pour les associations des fichiers Waldec et Import.
 
@@ -160,4 +160,3 @@ Vous pouvez également prendre contact avec le greffier des associations à la p
 # License
 
 Ce projet est sous [license MIT](https://fr.wikipedia.org/wiki/Licence_MIT)
-
