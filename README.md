@@ -29,7 +29,7 @@ Les fichiers RNA vont par paire Waldec / Import :
 Pour une installation manuelle, vous aurez besoin de :
 
 - postgresql en version supérieure a 9.5
-- ruby en version 2.6.10
+- ruby en version 2.7.6
 - git
 - un runtime java pour solr (comme OpenJDK) - version 8 (dépendance Solr)
 
