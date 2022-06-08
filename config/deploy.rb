@@ -23,7 +23,7 @@ set :forward_agent, true
 set :port, 22
 set :repository, 'git@github.com:etalab/rna_as_api.git'
 
-branch = begin
+branch = ENV['branch'] || begin
            case ENV['to']
            when 'production'
              'master'
