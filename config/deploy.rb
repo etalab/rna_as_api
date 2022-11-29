@@ -68,7 +68,6 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # Production database has to be setup !
-  invoke :'ownership'
   invoke :'samhain_db_update'
 end
 
@@ -83,7 +82,6 @@ task :deploy do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'deploy:cleanup'
-    invoke :'ownership'
 
     on :launch do
       in_path(fetch(:current_path)) do
@@ -91,7 +89,6 @@ task :deploy do
         command %{touch tmp/restart.txt}
 
         invoke :whenever_update
-        invoke :'ownership'
         invoke :solr
       end
 
@@ -134,8 +131,4 @@ task passenger: :remote_environment do
     echo 'Skipping: no passenger app found (will be automatically loaded)'
   fi
   }
-end
-
-task :ownership do
-  command %{sudo chown -R deploy "#{fetch(:deploy_to)}"}
 end
