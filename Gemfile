@@ -5,20 +5,20 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.2'
+gem 'rails'
 
 gem 'colorize'
-gem 'interactor', '~> 3.1.0'
+gem 'interactor'
 
 # Generate logs for elasticsearch
 gem 'logstasher'
 
-gem 'pg', '~> 0.21'
-gem 'puma', '~> 3.7'
+gem 'pg'
+gem 'puma'
 
 gem 'rack-cors'
 gem 'ruby-progressbar'
-gem 'rubyzip', '~> 1.2.2'
+gem 'rubyzip'
 gem 'smarter_csv'
 # Gem progress_bar required for displaying progress in rake sunspot:reindex
 gem 'progress_bar'
@@ -34,11 +34,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 3.7.2'
+  gem 'rspec-rails'
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'mina'
   gem 'mina-whenever'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -46,7 +46,7 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen', '~> 2.0.1'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
