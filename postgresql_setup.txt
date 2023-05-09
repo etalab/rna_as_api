@@ -5,9 +5,12 @@ CREATE DATABASE rna_as_api_test WITH OWNER rna_as_api;
 
 \c rna_as_api_test;
 CREATE EXTENSION pg_trgm;
+CREATE EXTENSION unaccent;
 
 \c rna_as_api_development;
 CREATE EXTENSION pg_trgm;
+CREATE EXTENSION unaccent;
 
 \c rna_as_api_production;
 CREATE EXTENSION pg_trgm;
+CREATE EXTENSION unaccent;
